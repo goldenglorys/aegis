@@ -21,7 +21,7 @@ def _is_declarative(text: str) -> bool:
     """Return True if text has a grammatical subject and a root verb."""
     doc = _nlp(text)
     has_subject = any(tok.dep_ in ("nsubj", "nsubjpass") for tok in doc)
-    has_root_verb = any(tok.dep_ == "ROOT" and tok.pos_ == "VERB" for tok in doc)
+    has_root_verb = any(tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX") for tok in doc)
     return has_subject and has_root_verb
 
 

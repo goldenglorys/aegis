@@ -95,7 +95,11 @@ class TestGapAnalyzer:
 
         with patch("app.services.gap_analyzer._get_model") as mock_get_model:
             mock_model = MagicMock()
-            mock_model.encode.return_value = np.array([[0.0, 1.0]])
+            # content encoded first, query second — orthogonal vectors → dot product = 0.0
+            mock_model.encode.side_effect = [
+                np.array([[1.0, 0.0]]),  # content_vecs
+                np.array([[0.0, 1.0]]),  # query_vecs
+            ]
             mock_get_model.return_value = mock_model
 
             result = analyze_gaps(sub_queries, content, threshold=0.72)

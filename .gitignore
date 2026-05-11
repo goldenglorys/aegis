@@ -14,4 +14,3 @@ htmlcov/
 *.swo
 .DS_Store
 instruction.md
-TECHNICAL_DECISIONS.md
